@@ -1,0 +1,191 @@
+/* Aegis 主题：深色侧栏 + 柔和卡片 + 紫蓝主色 */
+:root {
+  --aegis-primary: #6366f1;
+  --aegis-primary-dark: #4f46e5;
+  --aegis-bg: #f4f5fa;
+  --aegis-sidebar: #1e2030;
+  --aegis-text: #1f2330;
+  --aegis-muted: #8a90a2;
+  --aegis-border: #ebedf3;
+  --el-color-primary: #6366f1;
+  --el-border-radius-base: 8px;
+}
+
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; margin: 0; }
+body {
+  font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: var(--aegis-bg);
+  color: var(--aegis-text);
+  font-size: 14px;
+}
+
+/* ---------- 登录页 ---------- */
+.login-wrap {
+  height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+}
+.login-card {
+  width: 380px; background: #fff; border-radius: 18px; padding: 40px 34px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.25);
+}
+.login-card h1 { margin: 0 0 4px; font-size: 26px; }
+.login-card .sub { color: var(--aegis-muted); margin-bottom: 26px; font-size: 13px; }
+
+/* ---------- 布局 ---------- */
+.layout { display: flex; height: 100vh; }
+.sidebar {
+  width: 220px; background: var(--aegis-sidebar); color: #c7cad6;
+  display: flex; flex-direction: column; flex-shrink: 0; transition: width .18s ease;
+}
+.sidebar.collapsed { width: 66px; }
+.sidebar .brand {
+  font-size: 20px; font-weight: 700; color: #fff; padding: 22px 24px;
+  letter-spacing: 1px; display: flex; align-items: center; gap: 10px;
+}
+.sidebar.collapsed .brand { padding: 22px 0; justify-content: center; }
+.sidebar .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: #6366f1; box-shadow: 0 0 12px #6366f1; flex-shrink: 0; }
+
+.nav-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 4px 0; }
+.nav-item {
+  display: flex; align-items: center; gap: 12px; padding: 11px 24px;
+  cursor: pointer; color: #c7cad6; font-size: 14px; border-left: 3px solid transparent;
+  transition: all .15s; white-space: nowrap;
+}
+.nav-item:hover { background: rgba(255,255,255,.06); color: #fff; }
+.nav-item.active { background: rgba(99,102,241,.18); color: #fff; border-left-color: var(--aegis-primary); }
+.nav-group { padding: 16px 24px 6px; font-size: 11px; color: #6b7080; letter-spacing: 1px; text-transform: uppercase; }
+.sidebar.collapsed .nav-item { justify-content: center; padding: 12px 0; gap: 0; }
+
+.sidebar-footer { padding: 12px; border-top: 1px solid rgba(255,255,255,.08); }
+.sidebar.collapsed .sidebar-footer { padding: 12px 8px; }
+.footer-label { color: #6b7080; font-size: 11px; margin-bottom: 6px; letter-spacing: 1px; }
+.footer-app-btn { width: 100%; background: rgba(255,255,255,.06); border: none; color: #c7cad6; padding: 9px; border-radius: 8px; cursor: pointer; display: flex; justify-content: center; }
+.footer-app-btn:hover { background: rgba(99,102,241,.25); color: #fff; }
+.collapse-toggle { display: flex; align-items: center; gap: 10px; padding: 9px 8px; margin-top: 8px; cursor: pointer; color: #c7cad6; border-radius: 8px; font-size: 13px; }
+.collapse-toggle:hover { background: rgba(255,255,255,.06); color: #fff; }
+.sidebar.collapsed .collapse-toggle { justify-content: center; }
+
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar {
+  height: 60px; background: #fff; border-bottom: 1px solid var(--aegis-border);
+  display: flex; align-items: center; padding: 0 24px; gap: 10px; flex-shrink: 0;
+}
+.topbar .spacer { flex: 1; }
+.content { flex: 1; overflow: auto; padding: 24px 28px; }
+
+/* ---------- 卡片 / 标题 ---------- */
+.card {
+  background: #fff; border: 1px solid var(--aegis-border); border-radius: 14px;
+  padding: 20px; box-shadow: 0 1px 3px rgba(20,20,40,.04);
+}
+.card + .card { margin-top: 16px; }
+.page-title {
+  font-size: 20px; font-weight: 700; margin: 0 0 18px; color: var(--aegis-text);
+  display: flex; align-items: center; gap: 10px;
+}
+.page-title::before {
+  content: ""; width: 4px; height: 18px; border-radius: 3px;
+  background: linear-gradient(var(--aegis-primary), #8b5cf6);
+}
+.section-title { font-size: 15px; font-weight: 600; margin: 0 0 14px; color: var(--aegis-text); }
+
+/* ---------- 搜索表单（带标签网格） ---------- */
+.filters {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px 16px; align-items: end;
+}
+.filter { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.filter > label { font-size: 12px; color: var(--aegis-muted); font-weight: 500; }
+.filter .el-select, .filter .el-input, .filter .el-date-editor { width: 100% !important; }
+.filter.wide { grid-column: span 2; }
+.filter-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+.filter-actions .spacer { flex: 1; }
+
+/* ---------- 旧工具栏（按钮行） ---------- */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+
+/* ---------- 统计卡 ---------- */
+.stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.stat {
+  background: #fff; border: 1px solid var(--aegis-border); border-radius: 14px; padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(20,20,40,.04); position: relative; overflow: hidden;
+}
+.stat::after { content: ""; position: absolute; right: -10px; top: -10px; width: 56px; height: 56px; border-radius: 50%; background: rgba(99,102,241,.08); }
+.stat .n { font-size: 28px; font-weight: 700; line-height: 1.1; }
+.stat .l { color: var(--aegis-muted); font-size: 13px; margin-top: 6px; }
+
+/* ---------- 表格 ---------- */
+.el-table { border-radius: 10px; }
+.el-table th.el-table__cell { background: #fafbfd !important; color: #6b7080; font-weight: 600; }
+.mono { font-family: ui-monospace, Consolas, monospace; }
+.copyable { cursor: pointer; transition: color .12s; }
+.copyable:hover { color: var(--aegis-primary); }
+
+/* ============================================================
+   全站排版密度优化（统一所有页面，避免拥挤）
+   ============================================================ */
+/* 表格：每行更舒展、文字不挤、表头不竖排换行 */
+.el-table .el-table__cell { padding-top: 10px; padding-bottom: 10px; }
+.el-table .cell { line-height: 1.6; }
+.el-table th.el-table__cell .cell { white-space: nowrap; }
+/* 操作列多个按钮：换行时留纵向间距，相邻按钮留横向间距 */
+.el-table .el-table__cell .el-button { margin-bottom: 4px; }
+.el-table .el-table__cell .el-button + .el-button { margin-left: 8px; }
+/* 同一格内多个标签留空隙 */
+.el-table .el-tag + .el-tag { margin-left: 6px; }
+
+/* 详情描述列表：标签不竖排换行、单元格留白 */
+.el-descriptions__label { white-space: nowrap; }
+.el-descriptions__label.is-bordered-label,
+.el-descriptions__content.is-bordered-content { padding: 11px 14px !important; }
+
+/* 对话框：标题加粗、内容区留白更均匀 */
+.el-dialog__title { font-weight: 600; }
+.el-dialog__body { padding-top: 18px; padding-bottom: 6px; }
+
+/* 表单：项与项之间、控件高度更舒展 */
+.el-form-item { margin-bottom: 18px; }
+
+/* 卡片内顶部工具/筛选与表格之间留白 */
+.card .el-table { margin-top: 4px; }
+
+/* ============================================================
+   手机端适配（≤768px）：侧栏抽屉化、内容全宽、弹窗自适应
+   ============================================================ */
+.hamburger { font-size: 22px; cursor: pointer; color: var(--aegis-text); margin-right: 2px; }
+/* 侧栏在手机上变成从左滑出的抽屉 */
+.sidebar-mobile {
+  position: fixed; left: 0; top: 0; bottom: 0; width: 230px;
+  transform: translateX(-100%); transition: transform .22s ease; z-index: 1000;
+}
+.sidebar-mobile.open { transform: translateX(0); box-shadow: 6px 0 28px rgba(0,0,0,.35); }
+.sidebar-mobile .collapse-toggle { display: none; }   /* 手机端不需要"收起侧栏" */
+.sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 999; }
+
+@media (max-width: 768px) {
+  .content { padding: 14px; }
+  .topbar { padding: 0 12px; gap: 8px; height: 54px; }
+  .topbar-label { display: none; }                 /* 省空间：隐藏"当前软件"小字 */
+  .card { padding: 14px; border-radius: 12px; }
+  .card + .card { margin-top: 12px; }
+  .page-title { font-size: 18px; margin-bottom: 14px; }
+
+  /* 筛选区单列；不再跨两列 */
+  .filters { grid-template-columns: 1fr; gap: 12px; }
+  .filter.wide { grid-column: auto; }
+  .filter-actions { margin-top: 10px; }
+
+  /* 统计卡两列紧凑 */
+  .stat-row { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat { padding: 14px 16px; }
+  .stat .n { font-size: 22px; }
+
+  /* 弹窗自适应屏宽、可滚动 */
+  .el-dialog { width: 94vw !important; max-width: 94vw; margin-top: 6vh !important; }
+  .el-dialog__body { max-height: 70vh; overflow: auto; }
+  .el-message-box { width: 90vw !important; max-width: 90vw; }
+
+  /* 宽表格横向滑动更顺滑（带惯性） */
+  .el-table__body-wrapper, .el-scrollbar__wrap { -webkit-overflow-scrolling: touch; }
+}

@@ -1,0 +1,42 @@
+{
+  "_comment": "复制为 config.json 后填入真实值。切勿提交 config.json。",
+  "db_clients": [
+    {
+      "name": "default",
+      "rdbms": "postgresql",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "dbname": "aegis",
+      "user": "aegis",
+      "passwd": "CHANGE_ME",
+      "is_fast": false,
+      "connection_number": 8,
+      "timeout": 10.0
+    }
+  ],
+  "listeners": [
+    { "address": "0.0.0.0", "port": 3000, "https": false }
+  ],
+  "app": {
+    "threads_num": 4,
+    "enable_session": false,
+    "document_root": "./web_dist",
+    "max_connections": 20000,
+    "max_connections_per_ip": 50,
+    "client_max_body_size": "2M",
+    "client_max_memory_body_size": "1M",
+    "keepalive_requests": 1000,
+    "idle_connection_timeout": 60,
+    "log": { "log_path": "./", "logfile_base_name": "aegis", "log_level": "INFO" }
+  },
+  "custom_config": {
+    "tcp_verify_port": 9002,
+    "tz_offset_minutes": 480,
+    "_tz_comment": "后台显示/查询统一用的时区偏移(分钟)，UTC+8=480，UTC+0=0",
+    "bootstrap_admin": {
+      "_comment": "仅在 agents 表为空时用于创建第一个超管；创建后请立刻改密。",
+      "username": "admin0452",
+      "password": "CHANGE_ME_STRONG"
+    }
+  }
+}

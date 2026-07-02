@@ -1,0 +1,21 @@
+# 构建产物
+server/build/
+server/vcpkg_installed/
+server/web_dist/
+release/
+web/node_modules/
+web/dist/
+*.log
+
+# 机密配置（切勿提交）
+server/config/config.json
+.mcp.json
+server/cert/
+*.pem
+*.key
+session_snapshots/
+
+# IDE
+.vs/
+.idea/
+*.user

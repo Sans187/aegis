@@ -1,0 +1,14 @@
+{
+  "name": "aegis-server",
+  "version": "0.1.0",
+  "description": "Aegis verification system backend (Drogon + PostgreSQL).",
+  "dependencies": [
+    {
+      "name": "drogon",
+      "features": [ "postgres" ]
+    },
+    "libsodium",
+    "cryptopp",
+    "jsoncpp"
+  ]
+}
